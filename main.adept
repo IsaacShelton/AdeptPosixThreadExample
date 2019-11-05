@@ -1,0 +1,19 @@
+
+import 'sys/cstdio.adept'
+import 'sys/cstdlib.adept'
+import 'posix/pthread.adept'
+
+func myThreadFunc(input ptr) ptr {
+    repeat 100000, idx = idx
+    printf('Doing stuff on secondary thread\n')
+    return null
+}
+
+func main {
+    thread_id pthread_t
+    printf('Before Thread\n')
+    pthread_create(&thread_id, null, func &myThreadFunc, null)
+    printf('Doing stuff on main thread...\n')
+    pthread_join(thread_id, null)
+    printf('After Thread\n')
+}
